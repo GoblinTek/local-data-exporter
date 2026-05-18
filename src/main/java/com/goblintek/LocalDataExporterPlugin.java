@@ -25,6 +25,7 @@ import net.runelite.api.VarPlayer;
 import net.runelite.api.coords.WorldPoint;
 import net.runelite.api.events.GameTick;
 import net.runelite.api.gameval.VarbitID;
+import net.runelite.client.RuneLite;
 import net.runelite.client.config.ConfigManager;
 import net.runelite.client.eventbus.Subscribe;
 import net.runelite.client.game.ItemManager;
@@ -837,19 +838,7 @@ public class LocalDataExporterPlugin extends Plugin
 
 	private File getExportDirectory()
 	{
-		String configuredDirectory = getConfig().exportDirectory();
-
-		if (configuredDirectory == null || configuredDirectory.trim().isEmpty())
-		{
-			return getDefaultExportDirectory();
-		}
-
-		return new File(configuredDirectory.trim());
-	}
-
-	private File getDefaultExportDirectory()
-	{
-		return new File(new File(System.getProperty("user.home"), ".runelite"), "local-data-exporter");
+		return new File(RuneLite.RUNELITE_DIR, "local-data-exporter");
 	}
 
 	private int getExportIntervalTicks()
