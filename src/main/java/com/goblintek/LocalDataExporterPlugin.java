@@ -361,12 +361,12 @@ public class LocalDataExporterPlugin extends Plugin
 				}
 
 				int itemId = offer.getItemId();
-				int listedPrice = offer.getPrice();
-				int marketPrice = itemId > 0 ? itemManager.getItemPrice(itemId) : 0;
+				long listedPrice = offer.getPrice();
+				long marketPrice = itemId > 0 ? itemManager.getItemPrice(itemId) : 0;
 				int totalQuantity = offer.getTotalQuantity();
 				int completedQuantity = offer.getQuantitySold();
 				int remainingQuantity = Math.max(0, totalQuantity - completedQuantity);
-				int spent = offer.getSpent();
+				long spent = offer.getSpent();
 				String state = offer.getState().name();
 
 				long offerListedValueEstimate = (long) listedPrice * totalQuantity;
@@ -412,12 +412,12 @@ public class LocalDataExporterPlugin extends Plugin
 
 	private long estimateGrandExchangeAccountValue(
 			String state,
-			int marketPrice,
-			int listedPrice,
+			long marketPrice,
+			long listedPrice,
 			int totalQuantity,
 			int completedQuantity,
 			int remainingQuantity,
-			int spent
+			long spent
 	)
 	{
 		if (state != null && state.contains("SELL"))
@@ -653,8 +653,8 @@ public class LocalDataExporterPlugin extends Plugin
 
 				int id = item.getId();
 				int quantity = item.getQuantity();
-				int price = itemManager.getItemPrice(id);
-				long value = (long) price * quantity;
+				long price = itemManager.getItemPrice(id);
+				long value = price * quantity;
 
 				totalValue += value;
 				itemCount++;
